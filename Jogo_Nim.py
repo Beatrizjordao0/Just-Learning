@@ -35,6 +35,8 @@ def partida():
 
         n = int(input("Quantas peças? "))
         m = int(input("Limite de peças por jogada? \n"))
+        if n < m:
+            m = n
         ganhador = []
         vez_de_jogar = "N"
         jogada_J = 0
@@ -101,6 +103,8 @@ def partida():
 
             n = int(input("Quantas peças? "))
             m = int(input("Limite de peças por jogada? \n"))
+            if n < m:
+                m = n
             vez_de_jogar = "N"
             jogada_J = 0
             jogada_C = 0
@@ -162,4 +166,4 @@ def partida():
                         
 
 
-
+partida()
