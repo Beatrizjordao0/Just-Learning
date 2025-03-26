@@ -130,6 +130,6 @@ def n_primos(n):
             soma += 1
     return soma
 
-print(n_primos(10))
+print(n_primos(100))
 
 

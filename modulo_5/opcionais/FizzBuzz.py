@@ -17,5 +17,5 @@ def fizzbuzz(n):
     elif not n % 3 == 0 and not n % 5 == 0:
         return n
 
-
+print(fizzbuzz(10))
     

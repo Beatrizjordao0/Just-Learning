@@ -1,7 +1,6 @@
 # Criar uma forma de calcular a função binomial.
 # n, k = n!/(k! * (n - k)!)
 
-
 def fatorial(n):
     fat = 1
     while n > 1:
