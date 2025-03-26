@@ -1,6 +1,6 @@
 def minMax(temperature):
-    print(f"A menor temperatura é: {minimum(temperature)}")
-    print(f"A maior temperatura é: {maximum(temperature)}")
+    return (f"A menor temperatura é: {minimum(temperature)}\n"
+            f"A maior temperatura é: {maximum(temperature)}")
 
 def minimum(temps):
     min_value = temps[0]
