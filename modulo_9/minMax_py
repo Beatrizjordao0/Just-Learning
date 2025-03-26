@@ -16,6 +16,6 @@ def maximum(temps):
             max_value = temperatures
     return max_value
 
-lista_ = [39, 47, 22, 57, 89, 36, 75, 90, 11, 23, 90, 45, 99, 99]
+lista_ = [39, 47, 22, 57, 89, 36, 75, 90, 11, 23, 90, 45, 99, 99, -9]
 
 print(minMax(lista_))
