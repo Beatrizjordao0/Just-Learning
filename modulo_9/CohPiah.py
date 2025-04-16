@@ -80,41 +80,21 @@ def compara_assinatura(as_a, as_b):
     pass
 
 def calcula_assinatura(texto):
-    '''IMPLEMENTAR. Essa funcao recebe um texto e deve devolver a assinatura do texto.'''
-    pass
+    wal = tam_medio_palavras(texto)
+    ttr = type_token(texto)
+    hlr = hapax_legomana(texto)
+    sal = tam_medio_sentenca(texto)
+    sac = comp_senteca(texto)
+    pal = tam_medio_frase(texto)
+
+    return [wal, ttr, hlr, sal, sac, pal]
+
 
 def avalia_textos(textos, ass_cp):
     '''IMPLEMENTAR. Essa funcao recebe uma lista de textos e uma assinatura ass_cp e deve devolver o numero (1 a n) do texto com maior probabilidade de ter sido infectado por COH-PIAH.'''
     pass
 
-texto = "Num fabulário ainda por encontrar " \
-        "será um dia lida esta fábula: A uma " \
-        "bordadora dum país longínquo foi " \
-        "encomendado pela sua rainha que bordasse, " \
-        "sobre seda ou cetim, entre folhas, " \
-        "uma rosa branca. A bordadora, como era muito jovem, " \
-        "foi procurar por toda a parte aquela rosa branca " \
-        "perfeitíssima, em cuja semelhança bordasse a sua. " \
-        "Mas sucedia que umas rosas eram menos belas do " \
-        "que lhe convinha, e que outras não eram brancas " \
-        "como deviam ser. Gastou dias sobre dias, " \
-        "chorosas horas, buscando a rosa que imitasse " \
-        "com seda, e, como nos países longínquos nunca " \
-        "deixa de haver pena de morte, ela sabia bem que, " \
-        "pelas leis dos contos como este, não podiam deixar " \
-        "de a matar se ela não bordasse a rosa branca. " \
-        "Por fim, não tendo melhor remédio, bordou de " \
-        "memória a rosa que lhe haviam exigido. " \
-        "Depois de a bordar foi compará-la com as " \
-        "rosas brancas que existem realmente nas roseiras. " \
-        "Sucedeu que todas as rosas brancas se pareciam " \
-        "exactamente com a rosa que ela bordara, que cada " \
-        "uma delas era exactamente aquela. " \
-        "Ela levou o trabalho ao palácio e é de " \
-        "supor que casasse com o príncipe. " \
-        "No fabulário, onde vem, esta fábula não " \
-        "traz moralidade. Mesmo porque, na idade de ouro, " \
-        "as fábulas não tinham moralidade nenhuma."
+texto = "Então resolveu ir brincar com a Máquina pra ser também imperador dos filhos da mandioca. Mas as três cunhas deram muitas risadas e falaram que isso de deuses era gorda mentira antiga, que não tinha deus não e que com a máquina ninguém não brinca porque ela mata. A máquina não era deus não, nem possuía os distintivos femininos de que o herói gostava tanto. Era feita pelos homens. Se mexia com eletricidade com fogo com água com vento com fumo, os homens aproveitando as forças da natureza. Porém jacaré acreditou? nem o herói! Se levantou na cama e com um gesto, esse sim! bem guaçu de desdém, tó! batendo o antebraço esquerdo dentro do outro dobrado, mexeu com energia a munheca direita pras três cunhas e partiu. Nesse instante, falam, ele inventou o gesto famanado de ofensa: a pacova."
 
 # ***** Tamanho Médio ***** 
 
@@ -122,10 +102,13 @@ def tam_medio_palavras(texto):
     soma = 0
     plvr = 0
     palavras = qntd_palavra(texto)
+
     for palavra in palavras:
         soma += len(palavra)
         plvr += 1
+    
     media = soma / plvr
+
     return media
 
 # ***** quantidade de palavras do texto *****
@@ -133,11 +116,13 @@ def tam_medio_palavras(texto):
 def qntd_palavra(texto):
     todas_palavras = []
     sentencas = separa_sentencas(texto)
+
     for sentenca in sentencas:
         frases = separa_frases(sentenca)
         for frase in frases:
             palavras = separa_palavras(frase)
             todas_palavras.extend(palavras)
+
     return todas_palavras
 
 # ***** Número de palavras *****
@@ -145,8 +130,10 @@ def qntd_palavra(texto):
 def nmr_palavras(texto):
     palavras = qntd_palavra(texto)
     p = 0
+
     for palavra in palavras:
         p += 1
+
     return p
 
 # ***** Relação Type-Token *****
@@ -155,6 +142,7 @@ def type_token(texto):
     palavras = qntd_palavra(texto)
     palavras_dif = n_palavras_diferentes(palavras)
     p = nmr_palavras(texto)
+
     return palavras_dif / p
 
 # ***** Relação Hapax-Legomana *****
@@ -163,15 +151,63 @@ def hapax_legomana(texto):
     palavras = qntd_palavra(texto)
     palavras_unicas = n_palavras_unicas(palavras)
     p = nmr_palavras(texto)
+
     return palavras_unicas / p
 
 # ***** Tamanho médio de sentença *****
 def tam_medio_sentenca(texto):
-    caracteres = 0
-    sentenca = separa_sentencas(texto)
-    nmr_sentenca = len(sentenca)
-    palavras = qntd_palavra(texto)
-    for palavra in palavras:
-        caracteres += len(palavra)
-    return caracteres / nmr_sentenca
+    sentencas = separa_sentencas(texto)
+    nmr_sentenca = len(sentencas)
+    nmr_caracteres = 0
 
+    for sentenca in sentencas:
+        nmr_caracteres += len(sentenca)
+
+    return nmr_caracteres / nmr_sentenca
+
+# *****  Complexidade de Sentença *****
+
+def comp_senteca(texto):
+    sentencas = separa_sentencas(texto)
+    nmr_sentenca = len(sentencas)
+    frases = 0
+    for sentenca in sentencas:
+        frase = separa_frases(sentenca)
+        frases += len(frase)
+
+    return frases / nmr_sentenca
+
+# ***** Tamanho médio de frase *****
+
+def tam_medio_frase(texto):
+    frases = qntd_frases(texto)
+    caracteres_frase = 0
+    nmr_frase = nmr_frases(texto)
+    for frase in frases:
+        caracteres_frase += len(frase)
+
+    return caracteres_frase / nmr_frase
+
+# ***** Todas as frases de todas as sentenças *****
+
+def qntd_frases(texto):
+    todas_frases = []
+    sentencas = separa_sentencas(texto)
+
+    for sentenca in sentencas:
+        frases = separa_frases(sentenca)
+        todas_frases.extend(frases)
+
+    return todas_frases
+
+# ***** Numero de caracteres em cada frase *****
+
+def nmr_frases(texto):
+    frases = qntd_frases(texto)
+    f = 0
+    for frase in frases:
+        f += 1
+    return f
+
+
+print(calcula_assinatura(texto))
