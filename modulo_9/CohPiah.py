@@ -6,12 +6,12 @@ def le_assinatura():
     print("Bem-vindo ao detector automático de COH-PIAH.")
     print("Informe a assinatura típica de um aluno infectado:")
 
-    wal = float(input("Entre o tamanho médio de palavra:"))
-    ttr = float(input("Entre a relação Type-Token:"))
-    hlr = float(input("Entre a Razão Hapax Legomana:"))
-    sal = float(input("Entre o tamanho médio de sentença:"))
-    sac = float(input("Entre a complexidade média da sentença:"))
-    pal = float(input("Entre o tamanho medio de frase:"))
+    wal = float(input("Entre o tamanho médio de palavra: "))
+    ttr = float(input("Entre a relação Type-Token: "))
+    hlr = float(input("Entre a Razão Hapax Legomana: "))
+    sal = float(input("Entre o tamanho médio de sentença: "))
+    sac = float(input("Entre a complexidade média da sentença: "))
+    pal = float(input("Entre o tamanho medio de frase: "))
 
     return [wal, ttr, hlr, sal, sac, pal]
 
@@ -19,11 +19,11 @@ def le_textos():
     '''A funcao le todos os textos a serem comparados e devolve uma lista contendo cada texto como um elemento'''
     i = 1
     textos = []
-    texto = input("Digite o texto " + str(i) +" (aperte enter para sair):")
+    texto = input("Digite o texto " + str(i) +" (aperte enter para sair): ")
     while texto:
         textos.append(texto)
         i += 1
-        texto = input("Digite o texto " + str(i) +" (aperte enter para sair):")
+        texto = input("Digite o texto " + str(i) +" (aperte enter para sair): ")
 
     return textos
 
@@ -75,7 +75,6 @@ def n_palavras_diferentes(lista_palavras):
 #                                ***** Minha Parte ***** 
 
 def compara_assinatura(as_a, as_b):
-    '''IMPLEMENTAR. Essa funcao recebe duas assinaturas de texto e deve devolver o grau de similaridade nas assinaturas.'''
     assinaturas = []
     for ass in range(len(as_a)):
         diferenca = abs(as_a[ass] - as_b[ass])
@@ -101,7 +100,7 @@ def calcula_assinatura(texto):
 
 
 def avalia_textos(textos, ass_cp):
-    '''IMPLEMENTAR. Essa funcao recebe uma lista de textos e uma assinatura ass_cp e deve devolver o numero (1 a n) do texto com maior probabilidade de ter sido infectado por COH-PIAH.'''
+    
     similaridades = []
 
     for texto in textos:
