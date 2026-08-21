@@ -1,0 +1,21 @@
+22/10/24
+
+margin no css recebe 4 valores:
+
+--> top right bottom left <--
+
+!Essa é a ordem!
+e.g:
+
+--> body {
+    margin: 10px 3px 5px 2px
+}
+
+também pode ser apenas dois valores que vai funcionar como top e bottom, left and right
+e.g
+
+--> body {
+    margin: 5px 3px
+}
+
+aqui vai ser 5px pra cima e para baixo e 3px para a esquerda e para a direita

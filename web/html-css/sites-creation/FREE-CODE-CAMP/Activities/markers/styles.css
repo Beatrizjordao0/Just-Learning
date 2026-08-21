@@ -1,0 +1,64 @@
+h1 {
+    text-align: center;
+  }
+  
+  .container {
+    background-color: rgb(255, 255, 255);
+    padding: 10px 0;
+  }
+  
+  .marker {
+    width: 200px;
+    height: 25px;
+    margin: 10px auto;
+  }
+  
+  .cap {
+    width: 60px;
+    height: 25px;
+  }
+  
+  .sleeve {
+    width: 110px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-left: 10px double rgba(0, 0, 0, 0.75);
+  }
+  
+  .cap, .sleeve {
+    display: inline-block;
+  }
+  
+  .red {
+    background: linear-gradient(rgb(122, 74, 14), rgb(245, 62, 113), rgb(162, 27, 27));
+    box-shadow: 0 0 20px 0 rgba(83, 14, 14, 0.8);
+  }
+  /* 
+    box-shadow: offsetX offsetY color;
+    Here's how the offsetX and offsetY values work:
+
+    both offsetX and offsetY accept number values in px and other CSS units
+    a positive offsetX value moves the shadow right and a negative value moves it left
+    a positive offsetY value moves the shadow down and a negative value moves it up
+    if you want a value of zero (0) for any or both offsetX and offsetY, you don't need to add a unit. 
+    Every browser understands that zero means no change.
+    The height and width of the shadow is determined by the height and width of the element it's applied to. 
+    You can also use an optional spreadRadius value to spread out the reach of the shadow. More on that later.
+
+    box-shadow: offsetX offsetY blurRadius color;
+    If a blurRadius value isn't included, it defaults to 0 and produces sharp edges. 
+    The higher the value of blurRadius, the greater the blurring effect is.
+
+    box-shadow: offsetX offsetY blurRadius spreadRadius color;
+    Like blurRadius, spreadRadius defaults to 0 if it isn't included.
+*/
+
+  .green {
+    background: linear-gradient(#55680D, #71F53E, #116C31);
+    box-shadow: 0 0 20px 0 #3B7E20CC;
+  }
+  
+  .blue {
+    background: linear-gradient(hsl(186, 76%, 16%), hsl(223, 90%, 60%), hsl(240, 56%, 42%));
+    box-shadow: 0 0 20px 0 hsla(223, 59%, 31%, 0.8);
+  }

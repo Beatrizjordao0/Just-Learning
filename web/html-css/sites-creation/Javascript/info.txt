@@ -1,0 +1,32 @@
+Hello! This is a folder full of activities from basics to advanced, 
+where I will be studying and improoving my skills to beat the others!
+Just kidding! I'm going to improove my skills so I can get a job,
+which is very usefull. But I should just shut up right now, right?
+
+Let's get started!!!
+
+oh, wait!!
+
+I almost forgot. My name is Beatriz Jordão(Jordon) and I'm currently 18yo.
+
+I study Computer Science at Uninassau, in Paulista, Pernambuco, Brazil
+
+SO, NOW WE CAN GET THIS PARTY STARTEEEDD!!!
+
+
+Java-script is a client side language
+
+html - content
+css - design
+javascript - behavior, interaction
+
+
+alert("Olá, mundo!") - console 
+
+document.body.style.backgrounf = "black"
+
+document.querySelector("img#hplogo").style.filter="grayscale(100%)"
+
+Netscape Communications created javascript
+
+ECMAScript is the standardized version of JavaScript.

@@ -1,0 +1,12 @@
+# tela1.kv
+<Tela1>:
+    name: 'tela1'
+    BoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            text: 'Esta é a Tela 1'
+            halign: 'center'
+        MDRaisedButton:
+            text: 'Ir para a Tela 2'
+            pos_hint: {'center_x':0.5, 'center_y':0.4}
+            on_release: app.trocar_tela('tela2')

@@ -8,3 +8,4 @@ venv/
 .DS_Store
 desktop.ini
 *.log
+web/flask/verbo-janga/.env
