@@ -9,7 +9,7 @@ Os projetos maiores continuam em repositórios próprios. Aqui ficam conteúdos 
 - `python/fundamentos`: lógica, funções, listas, matrizes e exercícios introdutórios;
 - `python/poo`: classes, herança e exercícios de orientação a objetos;
 - `python/dados-e-bancos`: Pandas, Excel, CSV e MySQL;
-- `python/interfaces-graficas`: Tkinter, CustomTkinter, Kivy e Turtle, incluindo os estudos antigos de `Telatest_workin`;
+- `python/interfaces-graficas`: exercícios com Tkinter, CustomTkinter, Kivy e Turtle;
 - `python/jogos-e-mini-projetos`: Nim, Snake, calculadoras e outros protótipos;
 - `web/html-css`: exercícios selecionados de HTML e CSS, incluindo o antigo `sites-creation`;
 - `web/flask`: protótipos com Flask, incluindo o projeto Verbo-Janga sem credenciais gravadas;
@@ -17,7 +17,9 @@ Os projetos maiores continuam em repositórios próprios. Aqui ficam conteúdos 
 
 ## Origem dos conteúdos
 
-Este repositório reúne conteúdos anteriormente distribuídos em `Just-Learning`, `my_vscode`, `UNINASSAU` e uma seleção de códigos de `html-css`, `sites-creation`, `Telatest_workin` e `Verbo-Janga`. A origem é preservada nos nomes das pastas e nos READMEs internos.
+Este repositório reúne conteúdos anteriormente distribuídos em `Just-Learning`, `my_vscode`, `UNINASSAU` e uma seleção de códigos de `html-css`, `sites-creation` e `Verbo-Janga`. A origem é preservada nos nomes das pastas e nos READMEs internos.
+
+Os estudos e protótipos do antigo `Telatest_workin` foram reunidos com o projeto principal em [`Projeto-WorkIn`](https://github.com/Beatrizjordao0/Projeto-WorkIn/tree/main/Telastest/estudos-antigos).
 
 Não foram migrados caches, configurações de IDE, bytecode, submódulos incompletos, arquivos vazios, material didático integral de terceiros ou a cópia duplicada do Projeto-Matriz.
 
