@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Rosto de gato</title>
+  <path fill="#f0a44b" d="M24 50 18 14l31 20a60 60 0 0 1 30 0l31-20-6 36a52 52 0 1 1-80 0Z"/>
+  <circle cx="47" cy="66" r="6" fill="#2f2f2f"/>
+  <circle cx="81" cy="66" r="6" fill="#2f2f2f"/>
+  <path fill="#d66f63" d="m64 76 8 7H56Z"/>
+  <path fill="none" stroke="#2f2f2f" stroke-linecap="round" stroke-width="4" d="M64 83v7m0 0c-7 0-11 3-14 7m14-7c7 0 11 3 14 7M42 82H16m26 8H12m74-8h26M86 90h30"/>
+</svg>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Disponibilidade | Verbo Janga</title>
+</head>
+<body>
+  <main>
+    <h1>Informe sua disponibilidade</h1>
+    <p>Usuário: {{ email }}</p>
+    <form method="POST" action="{{ url_for('department_page') }}">
+      <label for="days_off">Dias em que você não pode participar:</label>
+      <textarea id="days_off" name="days_off" rows="5" required></textarea>
+      <button type="submit">Salvar</button>
+    </form>
+  </main>
+</body>
+</html>

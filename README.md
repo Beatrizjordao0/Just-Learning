@@ -9,21 +9,21 @@ Os projetos maiores continuam em repositórios próprios. Aqui ficam conteúdos 
 - `python/fundamentos`: lógica, funções, listas, matrizes e exercícios introdutórios;
 - `python/poo`: classes, herança e exercícios de orientação a objetos;
 - `python/dados-e-bancos`: Pandas, Excel, CSV e MySQL;
-- `python/interfaces-graficas`: Tkinter, CustomTkinter, Kivy e Turtle;
+- `python/interfaces-graficas`: Tkinter, CustomTkinter, Kivy e Turtle, incluindo os estudos antigos de `Telatest_workin`;
 - `python/jogos-e-mini-projetos`: Nim, Snake, calculadoras e outros protótipos;
-- `web/html-css`: exercícios selecionados de HTML e CSS;
-- `web/flask`: protótipos com Flask;
+- `web/html-css`: exercícios selecionados de HTML e CSS, incluindo o antigo `sites-creation`;
+- `web/flask`: protótipos com Flask, incluindo o projeto Verbo-Janga sem credenciais gravadas;
 - `web/prototipos`: trabalhos acadêmicos de interface.
 
 ## Origem dos conteúdos
 
-Este repositório reúne conteúdos anteriormente distribuídos em `Just-Learning`, `my_vscode`, `UNINASSAU` e uma seleção de códigos de `html-css`. A origem é preservada nos nomes das pastas e nos READMEs internos.
+Este repositório reúne conteúdos anteriormente distribuídos em `Just-Learning`, `my_vscode`, `UNINASSAU` e uma seleção de códigos de `html-css`, `sites-creation`, `Telatest_workin` e `Verbo-Janga`. A origem é preservada nos nomes das pastas e nos READMEs internos.
 
 Não foram migrados caches, configurações de IDE, bytecode, submódulos incompletos, arquivos vazios, material didático integral de terceiros ou a cópia duplicada do Projeto-Matriz.
 
 ## Segurança
 
-Exemplos que acessam MySQL leem a senha pela variável de ambiente `MYSQL_PASSWORD`. Também podem usar `MYSQL_HOST`, `MYSQL_USER` e `MYSQL_DATABASE`. Nenhuma senha deve ser gravada nos arquivos.
+Exemplos que acessam MySQL leem a senha pela variável de ambiente `MYSQL_PASSWORD`. Também podem usar `MYSQL_HOST`, `MYSQL_USER` e `MYSQL_DATABASE`. O protótipo Verbo-Janga usa as variáveis `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` e `DB_NAME`. Nenhuma senha deve ser gravada nos arquivos.
 
 ## Observação
 

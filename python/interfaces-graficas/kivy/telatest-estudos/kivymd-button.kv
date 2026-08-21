@@ -1,0 +1,38 @@
+MDScreen:
+    md_bg_color: app.theme_cls.bg_normal
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(5)
+        size_hint: None, None
+        height: dp(48)
+        width: self.minimum_width
+        pos_hint: {"center_x": .10, "center_y": .25}
+
+        MDIconButton:
+            icon: 'account'
+        MDFlatButton:
+            text: 'FlatButton'
+        MDTextButton:
+            text: 'TextButton'
+        MDRectangleFlatButton:
+            text: 'Rectangle'
+        MDRaisedButton:
+            text: 'Raised'
+        MDFillRoundFlatButton:
+            text: 'FillRoundFlat'
+        MDFloatingActionButton:
+            icon: 'cog'
+
+        MDRoundFlatButton:
+            text: 'RoundFlat'
+        MDRoundFlatIconButton:
+            text: 'R.F Icon'
+            icon: 'plus'
+        MDRectangleFlatIconButton:
+            text: 'R.F icon'
+            icon: 'plus'
+        MDFillRoundFlatIconButton:
+            text: 'F.R.F icon'
+            icon: 'plus'
+        # MDMDFloatingActionButtonSpeedDial:

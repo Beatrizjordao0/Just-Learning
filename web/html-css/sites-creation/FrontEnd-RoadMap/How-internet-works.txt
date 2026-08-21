@@ -1,0 +1,54 @@
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        | Internet |
+
+
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                            |  HOW DOES THE INTERNET WORK?  |
+
+Questions to be answered:
+    1. What is internet?
+        The internet is a wire. A simple wire buried in the ground. It might be fiber optics, 
+        copper, or maybe beam to satellites or through cell-phone networks.
+        Is very useful because 2 computers connected directly to this wire can communicate. 
+        A server is a special computer connected directly to the internet 
+        and webpages are files on that server's hardrive.
+
+        Every server has an unique internet protocol address(IP address). Just like the
+        postal address of our houses. It helps computers find each other.
+        e.g. 
+        google.com = 72.14.205.100
+        It's weird to search for an IP instead of a name, so we give 'em names🙌
+
+        Your computer a home is not a server because is not connected directly to the internet
+        Our computers at home are called clients, because they are connected indirectly
+        to the internet through an internet service provider(ISP)
+    2. How does the information move on the internet?
+        Whenever an email, picture or web page travels across the internet, computers break
+        the information into smaller pieces called packets. When information reaches its 
+        destination, the packets are reassembled in their original order to make a picture,
+        email, web page or tweet.
+
+    3. How do the networks talk to each other and the protocols involved?
+
+    4. What's the relationship between packets, routers, and reliability?
+
+    5. HTTP and the HTML – How are you viewing this webpage in your browser?
+
+    6. How is the information transfer on the internet made secure?
+
+    7. What is cybersecurity and what are some common internet crimes?
+
+
+
+

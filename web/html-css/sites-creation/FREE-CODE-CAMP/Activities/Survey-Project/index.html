@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Soda-Form-Project</title>
+    <link rel='stylesheet' href='styles.css'>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='description' content='Formulário sobre refrigerantes.'>
+  </head>
+  <body>
+      <h1 id='title' class='title'>Formulário de Refrigerantes</h1>
+      <p class='description' id='description'>Preencha os campos abaixo para completar o formulário.</p>
+      <form id='survey-form'>
+        <fieldset>
+          <legend>Dados do participante</legend>
+          <label for='name' id='name-label'>
+            Digite seu nome: <input id='name' type='text' required placeholder='Maria Alencar'>
+          </label>
+          <label for='email' id='email-label'>
+            Digite seu email: <input id='email' type='email' required placeholder='seu@email.com'>
+          </label>
+          <label for='number' id='number-label'>
+            Quantos anos você tem? <input id='number' type='number' name='age' min='14' max='21' required placeholder='17'>
+          </label>
+          <label for='serie'>
+            Qual a sua série? (ensino médio) <input id='serie' type='number' min='1' max='3' required placeholder='3'>
+          </label>
+        </fieldset>
+       
+        <fieldset>
+
+          <label> Você toma refrigerantes?
+            <select id='dropdown'>
+              <option value=''>(escolha um)</option>
+              <option value='1'>Não</option>
+              <option value='2'>Sim</option>
+            </select>
+          </label>
+          
+        </fieldset>
+        <fieldset>
+          <legend>Qual o seu tipo de conta?</legend>
+          <label>
+            <input class='inline' type='radio' name='account' id='student-account' value='estudante'> Estudante
+          </label>
+          <label>
+            <input class='inline' type='radio' name='account' id='teacher-account' value='professor'> Professor
+          </label>
+        </fieldset>
+
+        <fieldset class='checkboxes'>
+          <legend>Qual(s) refrigerante(s) você gosta?
+          <label>
+            <input class='inline' type='checkbox' value='Coca'> Coca
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='antartica'> Antártica
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='pepsi'> pepsi
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='kwat'> Kwat
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='fanta'> fanta
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='h2o'> H2O
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='schweppes'> Schweppes
+          </label>
+          <label>
+            <input class='inline' type='checkbox' value='outro'> outro
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>O que você achou desse formulário?</legend>
+          <label for='comment'>
+            <textarea id='comment' name='comment' rows='3' cols='20' placeholder='Muito legal...'></textarea>
+          </label>
+        </fieldset>
+        <input type='submit' value='Submit' id='submit'>
+      </form>
+
+  </body>
+</html>

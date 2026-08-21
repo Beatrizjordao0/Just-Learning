@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois&display=swap');
+
+body { 
+  background-image: url('https://i.pinimg.com/736x/b0/3f/13/b03f1339f9efc4969b53a472b65bc939.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #dfdfdf;
+  width: 100%;
+  margin: 0 0;
+  font-family: 'Jacques Francois', serif;
+  font-size: 16px;
+
+}
+
+h1, p {
+  text-align: center;
+  margin: 1em auto
+}
+
+label {
+  display: block;
+  margin: 5px 0
+}
+form {
+  max-width: 500px;
+  min-width: 300px;
+  margin:0 auto;
+  background-color: #201c34;
+  padding: 15px 15px
+}
+
+fieldset {
+  border: none;
+  padding: 20px 0;
+  border-bottom: 3px solid #6c5c9f;
+}
+
+fieldset:last-of-type {
+    border-bottom: none;
+  }
+
+input[type="submit"] {
+    display: block;
+    width: 30%;
+    margin: 10px auto;
+    height: 2em;
+    font-size: 16px;
+    background-color: #3b3b4f;
+    border-color: white;
+    min-width: 150px;
+  }
+
+  input, textarea, select {
+    background-color: #0a0a23;
+    border: 1px solid #0a0a23;
+    color: #ffffff;
+    margin: 10px 0 0 0;
+    width: 100%;
+    min-height: 2em;
+  }
+
+  .inline {
+    width: unset;
+    margin: 0 0.5em 0 0;
+    vertical-align: middle;
+  }

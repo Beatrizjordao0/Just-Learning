@@ -1,0 +1,49 @@
+    * {
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        margin: 0;
+    }
+
+    body {
+        font-size:1.5rem;
+        background-color:#021b34 ;
+    }
+    
+    li {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: #021b34;
+    }
+
+    a:hover {
+        color: #00beef;
+    }
+
+    img {
+        width: 10rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .image-container {
+        justify-content: center;
+    }
+
+    main {
+        display: grid;
+        place-items: center;
+    }
+
+    nav {
+        place-items:center ;
+        padding: 3rem;
+    }
+
+    h1 {
+        margin-bottom: 3rem;
+    }
+
+    h3 {
+        margin-bottom: 3rem;
+    }
