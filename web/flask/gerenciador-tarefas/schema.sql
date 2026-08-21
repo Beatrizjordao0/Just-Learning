@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS GerenciadorDeTarefas;
+USE GerenciadorDeTarefas;
+
+CREATE TABLE IF NOT EXISTS user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(120) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS tarefas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(255) NOT NULL,
+    setor VARCHAR(120) NOT NULL,
+    prioridade VARCHAR(30) NOT NULL,
+    status VARCHAR(30) NOT NULL,
+    user_id INT NOT NULL,
+    CONSTRAINT fk_tarefas_user
+        FOREIGN KEY (user_id) REFERENCES user(id)
+        ON DELETE CASCADE
+);

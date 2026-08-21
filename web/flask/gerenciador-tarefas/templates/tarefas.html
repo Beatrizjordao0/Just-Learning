@@ -1,0 +1,93 @@
+import os
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <nav>
+        <a href="{{ url_for('show_users') }}">Cadastro de Usuários</a>
+        <a href="{{ url_for('show_tasks') }}">Cadastro de Tarefas</a>
+        <a href="{{ url_for('manage_tasks') }}">Gerenciar Tarefas</a>
+    </nav>
+
+    <header>
+        <h1>Cadastro de Tarefas</h1>
+    </header>
+
+    <form id="taskForm">
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required>
+
+        <label for="setor">Setor:</label>
+        <input type="text" id="setor" name="setor" required>
+
+        <label for="prioridade">Prioridade:</label>
+        <select id="prioridade" name="prioridade" required>
+            <option value="baixa">Baixa</option>
+            <option value="média">Média</option>
+            <option value="alta">Alta</option>
+        </select>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="a fazer">A Fazer</option>
+            <option value="fazendo">Fazendo</option>
+            <option value="pronto">Pronto</option>
+        </select>
+
+        <label for="user_id">Usuário:</label>
+        <select id="user_id" name="user_id" required>
+            {% for user in users %}
+                <option value="{{ user[0] }}">{{ user[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Criar Tarefa</button>
+    </form>
+
+    <footer>
+        <p>Gerenciador de Tarefas - 2024</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Enviar o formulário via AJAX
+            $('#taskForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var descricao = $('#descricao').val();
+                var setor = $('#setor').val();
+                var prioridade = $('#prioridade').val();
+                var status = $('#status').val();
+                var user_id = $('#user_id').val();
+
+                $.ajax({
+                    url: '/tarefas',  // Rota para inserir a tarefa
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        descricao: descricao,
+                        setor: setor,
+                        prioridade: prioridade,
+                        status: status,
+                        user_id: user_id
+                    }),
+                    success: function(response) {
+                        alert('Tarefa criada com sucesso!');
+                        $('#taskForm')[0].reset(); // Limpa o formulário após o envio
+                    },
+                    error: function(error) {
+                        alert('Erro ao criar a tarefa');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

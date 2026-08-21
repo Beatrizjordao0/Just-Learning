@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozinha Calma - Receitas Acessíveis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide-react@0.294.0/dist/lucide-react.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                light: "#F0F4F8",
+                DEFAULT: "#4A90E2",
+                dark: "#2C3E50",
+                text: "#333333",
+                "text-dark": "#E0E0E0",
+                card: "#FFFFFF",
+                "card-dark": "#34495E",
+                accent: "#50C878",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            transitionProperty: {
+              height: "height",
+              spacing: "margin, padding",
+            },
+          },
+        },
+        darkMode: "class",
+      };
+    </script>
+    <style>
+      body {
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .recipe-step,
+      .ingredient-item,
+      .recipe-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .recipe-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .animation-enabled * {
+        transition: all 0.3s ease-in-out;
+      }
+      .animation-disabled * {
+        transition: none !important;
+      }
+      /* For custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #2c3e50;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #4a90e2;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-brand-light dark:bg-brand-dark text-brand-text dark:text-brand-text-dark font-sans animation-enabled"
+  >
+    <!-- Header -->
+    <header
+      class="bg-white dark:bg-brand-card-dark shadow-md p-4 flex justify-between items-center sticky top-0 z-40"
+    >
+      <h1 class="text-2xl font-bold text-brand dark:text-white">
+        🍳 Cozinha Calma
+      </h1>
+      <button
+        id="back-to-home"
+        class="hidden bg-brand hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-arrow-left"
+        >
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
+        </svg>
+        Voltar
+      </button>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="p-4 md:p-8">
+      <!-- Home Page View -->
+      <div id="home-view">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold mb-2">
+            Receitas para todos, com calma e carinho.
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300">
+            Encontre pratos fáceis e deliciosos para o seu dia a dia.
+          </p>
+        </div>
+
+        <!-- Search and Filters -->
+        <div
+          class="mb-8 p-6 bg-white dark:bg-brand-card-dark rounded-xl shadow-lg"
+        >
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end"
+          >
+            <div class="col-span-1 md:col-span-2 lg:col-span-2">
+              <label
+                for="search-input"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+                >Buscar receita ou ingrediente</label
+              >
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Ex: Bolo de chocolate, frango..."
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-brand focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label
+                for="filter-time"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+                >Tempo de preparo</label
+              >
+              <select
+                id="filter-time"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-brand focus:border-transparent"
+              >
+                <option value="all">Qualquer tempo</option>
+                <option value="15">Até 15 min</option>
+                <option value="30">Até 30 min</option>
+                <option value="60">Até 1 hora</option>
+              </select>
+            </div>
+            <div>
+              <label
+                for="filter-type"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+                >Tipo de prato</label
+              >
+              <select
+                id="filter-type"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-brand focus:border-transparent"
+              >
+                <option value="all">Todos</option>
+                <option value="doce">Doce</option>
+                <option value="salgado">Salgado</option>
+                <option value="vegetariano">Vegetariano</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recipe Grid -->
+        <div
+          id="recipe-grid"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+          <!-- Recipe cards will be injected here by JavaScript -->
+        </div>
+        <p id="no-results" class="text-center text-xl hidden mt-8">
+          Nenhuma receita encontrada. Tente uma busca diferente!
+        </p>
+      </div>
+
+      <!-- Recipe Detail View -->
+      <div id="recipe-view" class="hidden">
+        <!-- Accessibility Toolbar -->
+        <div
+          class="bg-white dark:bg-brand-card-dark p-3 rounded-lg shadow-md mb-6 sticky top-20 z-30 flex flex-wrap items-center justify-center gap-4"
+        >
+          <div class="flex items-center gap-2">
+            <span class="font-semibold">Fonte:</span>
+            <button
+              id="decrease-font"
+              aria-label="Diminuir tamanho da fonte"
+              class="p-2 bg-gray-200 dark:bg-gray-600 rounded-full hover:bg-brand hover:text-white"
+            >
+              -A
+            </button>
+            <button
+              id="increase-font"
+              aria-label="Aumentar tamanho da fonte"
+              class="p-2 bg-gray-200 dark:bg-gray-600 rounded-full hover:bg-brand hover:text-white"
+            >
+              +A
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-semibold">Modo:</span>
+            <button
+              id="toggle-dark-mode"
+              aria-label="Alternar modo escuro"
+              class="p-2 bg-gray-200 dark:bg-gray-600 rounded-lg"
+            >
+              🌙 Escuro
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-semibold">Animações:</span>
+            <button
+              id="toggle-animations"
+              aria-label="Ativar ou desativar animações"
+              class="p-2 bg-brand-accent text-white rounded-lg"
+            >
+              Ligadas
+            </button>
+          </div>
+          <button
+            id="toggle-focus-mode"
+            class="w-full sm:w-auto bg-brand-accent hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-glasses"
+            >
+              <path
+                d="M14 6a2 2 0 0 1-2-2 2 2 0 0 1-2 2H8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 1 2 2 2 2 0 0 1 2-2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2Z"
+              />
+              <path d="M6 14v-1a2 2 0 0 0-2-2H2" />
+              <path d="M18 14v-1a2 2 0 0 1 2-2h2" />
+            </svg>
+            Modo Foco
+          </button>
+        </div>
+
+        <!-- Recipe Content -->
+        <article
+          id="recipe-content"
+          class="bg-white dark:bg-brand-card-dark p-6 md:p-8 rounded-2xl shadow-xl"
+        >
+          <h2
+            id="recipe-title"
+            class="text-3xl md:text-4xl font-bold text-brand dark:text-white mb-4"
+          ></h2>
+          <div
+            class="flex flex-wrap gap-4 text-gray-600 dark:text-gray-300 mb-6"
+          >
+            <span id="recipe-time" class="flex items-center gap-1"></span>
+            <span id="recipe-difficulty" class="flex items-center gap-1"></span>
+          </div>
+          <img
+            id="recipe-image"
+            src=""
+            alt=""
+            class="w-full h-64 object-cover rounded-lg mb-8"
+          />
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Ingredients and Notes -->
+            <div class="lg:col-span-1">
+              <h3 class="text-2xl font-bold mb-4 border-b-2 border-brand pb-2">
+                Ingredientes
+              </h3>
+              <ul id="recipe-ingredients" class="space-y-3">
+                <!-- Ingredient items will be injected here -->
+              </ul>
+              <div class="mt-8">
+                <h3 class="text-2xl font-bold mb-4">Suas Anotações</h3>
+                <textarea
+                  id="personal-notes"
+                  placeholder="Adapte a receita, anote dicas..."
+                  class="w-full h-32 p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-brand focus:border-transparent"
+                  aria-label="Campo para anotações pessoais"
+                ></textarea>
+                <p class="text-sm text-gray-500 mt-1">
+                  Suas notas são salvas automaticamente no navegador.
+                </p>
+              </div>
+            </div>
+
+            <!-- Steps and TTS -->
+            <div class="lg:col-span-2">
+              <div
+                class="flex flex-wrap items-center justify-between mb-4 pb-2 border-b-2 border-brand"
+              >
+                <h3 class="text-2xl font-bold">Modo de Preparo</h3>
+                <!-- Text-to-Speech Controls -->
+                <div
+                  id="tts-controls"
+                  class="bg-gray-100 dark:bg-gray-700 p-2 rounded-lg flex items-center gap-3"
+                >
+                  <button
+                    id="play-tts"
+                    aria-label="Ler receita em voz alta"
+                    class="p-2 rounded-full hover:bg-brand hover:text-white"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-play-circle"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polygon points="10 8 16 12 10 16 10 8" />
+                    </svg>
+                  </button>
+                  <button
+                    id="pause-tts"
+                    aria-label="Pausar leitura"
+                    class="p-2 rounded-full hover:bg-brand hover:text-white hidden"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-pause-circle"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="10" x2="10" y1="15" y2="9" />
+                      <line x1="14" x2="14" y1="15" y2="9" />
+                    </svg>
+                  </button>
+                  <label for="speed-tts" class="sr-only"
+                    >Velocidade da leitura</label
+                  >
+                  <input
+                    id="speed-tts"
+                    type="range"
+                    min="0.5"
+                    max="2"
+                    value="1"
+                    step="0.1"
+                    class="w-24"
+                  />
+                </div>
+              </div>
+              <div id="recipe-steps" class="space-y-4">
+                <!-- Recipe steps will be injected here -->
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- Focus Mode Overlay -->
+    <div
+      id="focus-overlay"
+      class="hidden fixed inset-0 bg-brand-light dark:bg-brand-dark z-50 p-4 flex flex-col items-center justify-center"
+    >
+      <button
+        id="exit-focus-mode"
+        class="absolute top-4 right-4 bg-red-500 text-white p-3 rounded-full hover:bg-red-600"
+        aria-label="Sair do modo foco"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-x"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+      <div class="w-full max-w-2xl text-center">
+        <div
+          id="focus-content"
+          class="text-2xl md:text-4xl leading-relaxed mb-8"
+        >
+          <!-- Current step will be shown here -->
+        </div>
+        <p
+          id="focus-encouragement"
+          class="text-brand-accent text-lg font-semibold mb-8"
+        >
+          Você está indo muito bem!
+        </p>
+        <div class="flex justify-between items-center w-full">
+          <button
+            id="focus-prev"
+            class="bg-brand text-white py-3 px-6 rounded-lg text-lg flex items-center gap-2 disabled:bg-gray-400"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-left"
+            >
+              <path d="m12 19-7-7 7-7" />
+              <path d="M19 12H5" />
+            </svg>
+            Anterior
+          </button>
+          <span id="focus-step-counter" class="text-lg font-mono">1 / 5</span>
+          <button
+            id="focus-next"
+            class="bg-brand text-white py-3 px-6 rounded-lg text-lg flex items-center gap-2 disabled:bg-gray-400"
+          >
+            Próximo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- DATA ---
+        const recipes = [
+          {
+            id: 1,
+            title: "Vitamina de Banana Rápida",
+            time: 5,
+            difficulty: "Fácil",
+            type: "doce",
+            image:
+              "https://placehold.co/600x400/FFF8DC/333333?text=Vitamina+de+Banana",
+            ingredients: [
+              { name: "1 banana madura", checked: false },
+              { name: "200ml de leite (ou bebida vegetal)", checked: false },
+              { name: "1 colher de sopa de aveia", checked: false },
+              { name: "Mel ou açúcar a gosto (opcional)", checked: false },
+            ],
+            steps: [
+              "Primeiro, descasque a banana e coloque no liquidificador.",
+              "Adicione o leite e a aveia.",
+              "Se quiser mais doce, coloque o mel ou açúcar.",
+              "Bata tudo por 1 minuto até ficar cremoso.",
+              "Sirva imediatamente. Bom apetite!",
+            ],
+            tags: ["vitamina", "banana", "rápido", "café da manhã", "lanche"],
+          },
+          {
+            id: 2,
+            title: "Pão com Ovo na Frigideira",
+            time: 10,
+            difficulty: "Fácil",
+            type: "salgado",
+            image:
+              "https://placehold.co/600x400/FFDAB9/333333?text=Pão+com+Ovo",
+            ingredients: [
+              { name: "2 fatias de pão de forma", checked: false },
+              { name: "1 ovo", checked: false },
+              { name: "1 fio de azeite ou manteiga", checked: false },
+              { name: "Sal e pimenta a gosto", checked: false },
+              { name: "1 fatia de queijo (opcional)", checked: false },
+            ],
+            steps: [
+              "Aqueça o azeite ou manteiga em uma frigideira em fogo médio.",
+              "Com um copo, retire o miolo de uma das fatias de pão.",
+              "Coloque a fatia de pão vazada na frigideira e quebre o ovo dentro do buraco.",
+              "Tempere com sal e pimenta. Cozinhe por 2-3 minutos.",
+              "Se usar queijo, coloque por cima. Tampe a frigideira por 1 minuto.",
+              "Use a outra fatia de pão para acompanhar. Está pronto!",
+            ],
+            tags: ["pão", "ovo", "rápido", "salgado", "frigideira"],
+          },
+          {
+            id: 3,
+            title: "Salada de Pote Colorida",
+            time: 15,
+            difficulty: "Fácil",
+            type: "vegetariano",
+            image:
+              "https://placehold.co/600x400/90EE90/333333?text=Salada+de+Pote",
+            ingredients: [
+              { name: "3 colheres (sopa) de azeite", checked: false },
+              { name: "Suco de 1/2 limão", checked: false },
+              { name: "1/2 xícara de grão de bico cozido", checked: false },
+              { name: "1/2 cenoura ralada", checked: false },
+              {
+                name: "1/2 xícara de tomate cereja cortado ao meio",
+                checked: false,
+              },
+              { name: "Folhas de alface rasgadas", checked: false },
+            ],
+            steps: [
+              "Em um pote de vidro grande, comece com o molho: misture o azeite e o limão.",
+              "Adicione uma pitada de sal se desejar.",
+              "Coloque os ingredientes em camadas, começando pelos mais pesados: grão de bico.",
+              "Em seguida, adicione a cenoura ralada e os tomates cereja.",
+              "Por último, complete com as folhas de alface.",
+              "Feche bem o pote. Na hora de comer, é só agitar para misturar!",
+            ],
+            tags: ["salada", "vegetariano", "saudável", "pote", "rápido"],
+          },
+          {
+            id: 4,
+            title: "Macarrão Alho e Óleo Simples",
+            time: 20,
+            difficulty: "Médio",
+            type: "salgado",
+            image: "https://placehold.co/600x400/F5DEB3/333333?text=Macarrão",
+            ingredients: [
+              { name: "200g de macarrão espaguete", checked: false },
+              { name: "4 dentes de alho picados", checked: false },
+              { name: "4 colheres de sopa de azeite", checked: false },
+              { name: "Sal e pimenta do reino a gosto", checked: false },
+              { name: "Salsinha picada para finalizar", checked: false },
+            ],
+            steps: [
+              "Cozinhe o macarrão em água fervente com sal, conforme as instruções da embalagem.",
+              "Enquanto o macarrão cozinha, aqueça o azeite em uma frigideira grande.",
+              "Adicione o alho picado e frite em fogo baixo até dourar. Cuidado para não queimar!",
+              "Escorra o macarrão cozido, guardando um pouco da água do cozimento.",
+              "Jogue o macarrão na frigideira com o alho e misture bem.",
+              "Se ficar seco, adicione um pouco da água do cozimento que você guardou.",
+              "Tempere com sal, pimenta e finalize com a salsinha picada.",
+            ],
+            tags: ["massa", "macarrão", "alho e óleo", "jantar", "clássico"],
+          },
+        ];
+
+        // --- DOM ELEMENTS ---
+        const body = document.body;
+        const mainContent = document.getElementById("main-content");
+        const homeView = document.getElementById("home-view");
+        const recipeView = document.getElementById("recipe-view");
+        const recipeGrid = document.getElementById("recipe-grid");
+        const backToHomeBtn = document.getElementById("back-to-home");
+
+        // Search & Filter
+        const searchInput = document.getElementById("search-input");
+        const filterTime = document.getElementById("filter-time");
+        const filterType = document.getElementById("filter-type");
+        const noResults = document.getElementById("no-results");
+
+        // Accessibility
+        const increaseFontBtn = document.getElementById("increase-font");
+        const decreaseFontBtn = document.getElementById("decrease-font");
+        const toggleDarkModeBtn = document.getElementById("toggle-dark-mode");
+        const toggleAnimationsBtn =
+          document.getElementById("toggle-animations");
+
+        // TTS
+        const playTtsBtn = document.getElementById("play-tts");
+        const pauseTtsBtn = document.getElementById("pause-tts");
+        const speedTtsSlider = document.getElementById("speed-tts");
+
+        // Focus Mode
+        const toggleFocusModeBtn = document.getElementById("toggle-focus-mode");
+        const focusOverlay = document.getElementById("focus-overlay");
+        const exitFocusModeBtn = document.getElementById("exit-focus-mode");
+        const focusContent = document.getElementById("focus-content");
+        const focusPrevBtn = document.getElementById("focus-prev");
+        const focusNextBtn = document.getElementById("focus-next");
+        const focusStepCounter = document.getElementById("focus-step-counter");
+        const focusEncouragement = document.getElementById(
+          "focus-encouragement"
+        );
+
+        // --- STATE ---
+        let currentRecipe = null;
+        let currentStepIndex = 0;
+        const encouragementMessages = [
+          "Você está indo bem!",
+          "Falta pouco para terminar!",
+          "Que cheirinho bom!",
+          "Passo a passo, sem pressa.",
+          "Você consegue!",
+          "Cozinhar é um ato de carinho.",
+        ];
+
+        // --- TTS STATE ---
+        const synth = window.speechSynthesis;
+        let utterance = null;
+
+        // --- INITIALIZATION ---
+
+        // Load user preferences from localStorage
+        const loadPreferences = () => {
+          const isDarkMode = localStorage.getItem("darkMode") === "true";
+          if (isDarkMode) {
+            document.documentElement.classList.add("dark");
+            toggleDarkModeBtn.textContent = "☀️ Claro";
+          }
+
+          const animationsDisabled =
+            localStorage.getItem("animationsDisabled") === "true";
+          if (animationsDisabled) {
+            body.classList.remove("animation-enabled");
+            body.classList.add("animation-disabled");
+            toggleAnimationsBtn.textContent = "Desligadas";
+            toggleAnimationsBtn.classList.remove("bg-brand-accent");
+            toggleAnimationsBtn.classList.add("bg-gray-500");
+          }
+
+          const fontSize = localStorage.getItem("fontSize");
+          if (fontSize) {
+            mainContent.style.fontSize = `${fontSize}px`;
+          }
+        };
+
+        const renderRecipes = () => {
+          const searchTerm = searchInput.value.toLowerCase();
+          const maxTime = filterTime.value;
+          const type = filterType.value;
+
+          const filteredRecipes = recipes.filter((recipe) => {
+            const matchesSearch =
+              searchTerm === "" ||
+              recipe.title.toLowerCase().includes(searchTerm) ||
+              recipe.tags.some((tag) => tag.includes(searchTerm)) ||
+              recipe.ingredients.some((ing) =>
+                ing.name.toLowerCase().includes(searchTerm)
+              );
+
+            const matchesTime =
+              maxTime === "all" || recipe.time <= parseInt(maxTime);
+            const matchesType = type === "all" || recipe.type === type;
+
+            return matchesSearch && matchesTime && matchesType;
+          });
+
+          recipeGrid.innerHTML = "";
+          if (filteredRecipes.length === 0) {
+            noResults.classList.remove("hidden");
+          } else {
+            noResults.classList.add("hidden");
+            filteredRecipes.forEach((recipe) => {
+              const card = document.createElement("div");
+              card.className =
+                "recipe-card bg-white dark:bg-brand-card-dark rounded-xl shadow-lg overflow-hidden cursor-pointer";
+              card.innerHTML = `
+                            <img src="${recipe.image}" alt="Imagem de ${recipe.title}" class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold truncate">${recipe.title}</h3>
+                                <div class="text-sm text-gray-500 dark:text-gray-400 mt-2 flex items-center justify-between">
+                                    <span>${recipe.time} min</span>
+                                    <span>${recipe.difficulty}</span>
+                                </div>
+                            </div>
+                        `;
+              card.addEventListener("click", () => showRecipe(recipe.id));
+              recipeGrid.appendChild(card);
+            });
+          }
+        };
+
+        const showRecipe = (id) => {
+          currentRecipe = recipes.find((r) => r.id === id);
+          if (!currentRecipe) return;
+
+          // Load saved notes and checked ingredients
+          const savedState =
+            JSON.parse(localStorage.getItem(`recipe_${id}`)) || {};
+
+          // Populate content
+          document.getElementById("recipe-title").textContent =
+            currentRecipe.title;
+          document.getElementById(
+            "recipe-time"
+          ).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${currentRecipe.time} min`;
+          document.getElementById(
+            "recipe-difficulty"
+          ).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chef-hat"><path d="M10 21.24V16a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v5.24"/><path d="M10 16s-1.5-2-3-2-3 2-3 2"/><path d="M14 16s1.5-2 3-2 3 2 3 2"/><path d="M4 11a8 8 0 0 1 16 0H4Z"/><path d="M12 4a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2v0a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2Z"/></svg> ${currentRecipe.difficulty}`;
+          const recipeImage = document.getElementById("recipe-image");
+          recipeImage.src = currentRecipe.image;
+          recipeImage.alt = `Imagem de ${currentRecipe.title}`;
+
+          const ingredientsList = document.getElementById("recipe-ingredients");
+          ingredientsList.innerHTML = "";
+          currentRecipe.ingredients.forEach((ing, index) => {
+            const isChecked = savedState.ingredients
+              ? savedState.ingredients[index]
+              : false;
+            const li = document.createElement("li");
+            li.className = "ingredient-item flex items-center";
+            li.innerHTML = `
+                        <input type="checkbox" id="ing-${index}" data-index="${index}" class="h-5 w-5 rounded border-gray-300 text-brand focus:ring-brand" ${
+              isChecked ? "checked" : ""
+            }>
+                        <label for="ing-${index}" class="ml-3 text-base">${
+              ing.name
+            }</label>
+                    `;
+            ingredientsList.appendChild(li);
+          });
+
+          const stepsList = document.getElementById("recipe-steps");
+          stepsList.innerHTML = "";
+          const icons = ["🥣", "🍳", "🔪", "🔥", "⏲️", "🍽️", "🎉"];
+          currentRecipe.steps.forEach((step, index) => {
+            const div = document.createElement("div");
+            div.className =
+              "recipe-step flex gap-4 p-4 bg-brand-light dark:bg-brand-dark rounded-lg";
+            div.innerHTML = `
+                        <div class="flex-shrink-0 bg-brand text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">${
+                          index + 1
+                        }</div>
+                        <p class="flex-grow">${step}</p>
+                    `;
+            stepsList.appendChild(div);
+          });
+
+          // Load notes
+          const notesTextarea = document.getElementById("personal-notes");
+          notesTextarea.value = savedState.notes || "";
+
+          homeView.classList.add("hidden");
+          recipeView.classList.remove("hidden");
+          backToHomeBtn.classList.remove("hidden");
+          window.scrollTo(0, 0);
+        };
+
+        const goHome = () => {
+          // Cancel any ongoing speech
+          synth.cancel();
+
+          homeView.classList.remove("hidden");
+          recipeView.classList.add("hidden");
+          backToHomeBtn.classList.add("hidden");
+          currentRecipe = null;
+        };
+
+        // --- EVENT HANDLERS ---
+
+        // Filtering
+        [searchInput, filterTime, filterType].forEach((el) => {
+          el.addEventListener("input", renderRecipes);
+        });
+
+        // Navigation
+        backToHomeBtn.addEventListener("click", goHome);
+
+        // Accessibility Controls
+        increaseFontBtn.addEventListener("click", () => {
+          let currentSize = parseFloat(
+            window
+              .getComputedStyle(mainContent, null)
+              .getPropertyValue("font-size")
+          );
+          let newSize = Math.min(currentSize + 1, 24); // Cap at 24px
+          mainContent.style.fontSize = `${newSize}px`;
+          localStorage.setItem("fontSize", newSize);
+        });
+
+        decreaseFontBtn.addEventListener("click", () => {
+          let currentSize = parseFloat(
+            window
+              .getComputedStyle(mainContent, null)
+              .getPropertyValue("font-size")
+          );
+          let newSize = Math.max(currentSize - 1, 14); // Floor at 14px
+          mainContent.style.fontSize = `${newSize}px`;
+          localStorage.setItem("fontSize", newSize);
+        });
+
+        toggleDarkModeBtn.addEventListener("click", () => {
+          document.documentElement.classList.toggle("dark");
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("darkMode", isDark);
+          toggleDarkModeBtn.textContent = isDark ? "☀️ Claro" : "🌙 Escuro";
+        });
+
+        toggleAnimationsBtn.addEventListener("click", () => {
+          body.classList.toggle("animation-enabled");
+          body.classList.toggle("animation-disabled");
+          const isDisabled = body.classList.contains("animation-disabled");
+          localStorage.setItem("animationsDisabled", isDisabled);
+          if (isDisabled) {
+            toggleAnimationsBtn.textContent = "Desligadas";
+            toggleAnimationsBtn.classList.remove("bg-brand-accent");
+            toggleAnimationsBtn.classList.add("bg-gray-500");
+          } else {
+            toggleAnimationsBtn.textContent = "Ligadas";
+            toggleAnimationsBtn.classList.add("bg-brand-accent");
+            toggleAnimationsBtn.classList.remove("bg-gray-500");
+          }
+        });
+
+        // Focus Mode
+        toggleFocusModeBtn.addEventListener("click", () => {
+          focusOverlay.classList.remove("hidden");
+          currentStepIndex = 0;
+          updateFocusView();
+        });
+
+        exitFocusModeBtn.addEventListener("click", () => {
+          focusOverlay.classList.add("hidden");
+        });
+
+        focusNextBtn.addEventListener("click", () => {
+          if (currentStepIndex < currentRecipe.steps.length - 1) {
+            currentStepIndex++;
+            updateFocusView();
+          }
+        });
+
+        focusPrevBtn.addEventListener("click", () => {
+          if (currentStepIndex > 0) {
+            currentStepIndex--;
+            updateFocusView();
+          }
+        });
+
+        const updateFocusView = () => {
+          focusContent.textContent = currentRecipe.steps[currentStepIndex];
+          focusStepCounter.textContent = `${currentStepIndex + 1} / ${
+            currentRecipe.steps.length
+          }`;
+          focusPrevBtn.disabled = currentStepIndex === 0;
+          focusNextBtn.disabled =
+            currentStepIndex === currentRecipe.steps.length - 1;
+
+          // Update encouragement message randomly
+          if (Math.random() > 0.5) {
+            focusEncouragement.textContent =
+              encouragementMessages[
+                Math.floor(Math.random() * encouragementMessages.length)
+              ];
+          }
+
+          if (currentStepIndex === currentRecipe.steps.length - 1) {
+            focusEncouragement.textContent =
+              "Parabéns, você terminou a receita!";
+          }
+        };
+
+        // Text-to-Speech
+        const handleTTS = () => {
+          if (synth.speaking) {
+            if (synth.paused) {
+              synth.resume();
+              playTtsBtn.classList.add("hidden");
+              pauseTtsBtn.classList.remove("hidden");
+            } else {
+              // This case handles starting speech from scratch
+              synth.cancel(); // Stop any previous speech
+              startSpeechSynthesis();
+            }
+          } else {
+            startSpeechSynthesis();
+          }
+        };
+
+        const startSpeechSynthesis = () => {
+          const textToRead = `Receita: ${
+            currentRecipe.title
+          }. Ingredientes: ${currentRecipe.ingredients
+            .map((i) => i.name)
+            .join(", ")}. Modo de preparo: ${currentRecipe.steps.join(". ")}`;
+          utterance = new SpeechSynthesisUtterance(textToRead);
+          utterance.lang = "pt-BR";
+          utterance.rate = speedTtsSlider.value;
+          utterance.onend = () => {
+            playTtsBtn.classList.remove("hidden");
+            pauseTtsBtn.classList.add("hidden");
+          };
+          synth.speak(utterance);
+          playTtsBtn.classList.add("hidden");
+          pauseTtsBtn.classList.remove("hidden");
+        };
+
+        playTtsBtn.addEventListener("click", handleTTS);
+
+        pauseTtsBtn.addEventListener("click", () => {
+          synth.pause();
+          playTtsBtn.classList.remove("hidden");
+          pauseTtsBtn.classList.add("hidden");
+        });
+
+        speedTtsSlider.addEventListener("input", () => {
+          if (synth.speaking && utterance) {
+            utterance.rate = speedTtsSlider.value;
+          }
+        });
+
+        // Saving notes and ingredient state
+        recipeView.addEventListener("input", (e) => {
+          if (!currentRecipe) return;
+
+          const savedState = JSON.parse(
+            localStorage.getItem(`recipe_${currentRecipe.id}`)
+          ) || { ingredients: [], notes: "" };
+
+          if (e.target.id === "personal-notes") {
+            savedState.notes = e.target.value;
+          }
+
+          if (e.target.type === "checkbox") {
+            const index = parseInt(e.target.dataset.index);
+            if (!savedState.ingredients) {
+              savedState.ingredients = new Array(
+                currentRecipe.ingredients.length
+              ).fill(false);
+            }
+            savedState.ingredients[index] = e.target.checked;
+          }
+
+          localStorage.setItem(
+            `recipe_${currentRecipe.id}`,
+            JSON.stringify(savedState)
+          );
+        });
+
+        // --- RUN ---
+        loadPreferences();
+        renderRecipes();
+      });
+    </script>
+  </body>
+</html>
