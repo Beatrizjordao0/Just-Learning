@@ -1,0 +1,66 @@
+import os
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <nav>
+        <a href="{{ url_for('show_users') }}">Cadastro de Usuários</a>
+        <a href="{{ url_for('show_tasks') }}">Cadastro de Tarefas</a>
+        <a href="{{ url_for('manage_tasks') }}">Gerenciar Tarefas</a>
+    </nav>
+
+    <header>
+        <h1>Cadastro de Usuários</h1>
+    </header>
+
+    <form id="userForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit">Cadastrar Usuário</button>
+    </form>
+
+    <footer>
+        <p>Gerenciador de Tarefas - 2024</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Enviar o formulário via AJAX
+            $('#userForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var nome = $('#nome').val();
+                var email = $('#email').val();
+
+                $.ajax({
+                    url: '/usuarios',  // Rota para inserir o usuário
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        nome: nome,
+                        email: email
+                    }),
+                    success: function(response) {
+                        alert('Usuário cadastrado com sucesso!');
+                        $('#userForm')[0].reset(); // Limpa o formulário após o envio
+                    },
+                    error: function(error) {
+                        alert('Erro ao cadastrar o usuário');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

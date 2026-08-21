@@ -1,0 +1,3 @@
+Flask>=3
+Flask-Cors>=5
+mysql-connector-python>=9
